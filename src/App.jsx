@@ -27,9 +27,9 @@ function App() {
     phone: faker.phone.number()
   });
 
+  const [isCopied, setIsCopied] = useState(false);
 
 
-  const [userData, setUserData] = useState(generateFakeUserData());
   const [selectedJob, setSelectedJob] = useState('');
   const [selectedCar, setSelectedCar] = useState('');
   const [selectHome, setSelectHome] = useState('');
@@ -101,17 +101,18 @@ function App() {
     setSelectedValues5(newSelectedValues);
   };
 
-  const copyToClipboard = () => {
-    const sqlOutput = `INSERT INTO table_name (column1, column2, column3, ...)
-    VALUES (value1, value2, value3, ...);`;
 
-    navigator.clipboard.writeText(sqlOutput
-    ).then(() => {
-      alert('คัดลอกข้อความสำเร็จ');
-    }).catch((error) => {
-      console.error('Failed to copy: ', error);
-    });
-  }
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(sqlOutput)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000); // Reset color after 2 seconds
+      })
+      .catch((error) => {
+        console.error('Failed to copy: ', error);
+      });
+  };
+
 
   const checkBeforeSubmit = () => {
 
@@ -161,7 +162,6 @@ function App() {
 
   const generateSQL = () => {
     const newUserData = generateFakeUserData();
-    setUserData(newUserData);
 
     // Generate a random ID between 1000 and 5000
     const id_member = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
@@ -342,8 +342,6 @@ function App() {
     setSqlOutput(fullSQL);
   };
 
-
-  console.log("userdata   ", userData);
 
 
   return (
@@ -994,8 +992,8 @@ function App() {
           width: '50%',
           border: '1px solid #ddd',
           padding: '20px',
-          borderRadius: '8px', // Rounded corners for a better look
-          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
+          borderRadius: '8px',
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Typography sx={{ fontSize: "16px", fontWeight: 'bold', mb: 1 }}>
@@ -1006,16 +1004,17 @@ function App() {
         </Typography>
         <Button
           variant="contained"
-          color="primary"
           onClick={copyToClipboard}
-          sx={{ alignSelf: 'flex-end' }}
+          sx={{
+            alignSelf: 'flex-end',
+            backgroundColor: isCopied ? '#97cbff' : '#1976d2', // Custom color based on state
+            color: '#fff', // Ensure text color is readable on the background
+          }}
           disabled={sqlOutput === ''}
         >
-          Copy
+          {isCopied ? 'Copied!' : 'Copy'}
         </Button>
       </Box>
-
-
 
     </>
   );
