@@ -1,8 +1,27 @@
-# React + Vite
+# Travel Survey Form Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application for generating survey forms for tourists and general travelers. The application collects user interests, personal information, travel behavior, motivation, and decision-making factors, then generates SQL statements for database insertion.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **Dynamic Survey Forms**: Multi-part survey including interests, personal info, travel behavior, motivation, and decision-making.
+- **Interactive Inputs**:
+  - Checkboxes for multiple-choice questions.
+  - Radio buttons for single-choice selections.
+  - Conditional text fields for "Other" options.
+- **Fake Data Generation**: Uses [`@faker-js/faker`](https://github.com/faker-js/faker) to generate realistic user data.
+- **SQL Generation**: Converts form responses into SQL `INSERT` statements for database use.
+- **Copy to Clipboard**: Easily copy generated SQL queries.
+- **Validation**: Checks for incomplete survey fields before submission.
+
+---
+
+## Tech Stack
+
+- **React**: Frontend library
+- **Material-UI (MUI)**: UI components for styling and layout
+- **Faker.js**: Fake data generation
+- **JavaScript / JSX**: Core language
+- **CSS**: Styling
